@@ -3,6 +3,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from io import BytesIO
 import threading;
 import json
+import matplotlib.pyplot as plt
 
 motionData = ""
 
@@ -28,9 +29,8 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
 
 def proccess_motion_data(data):
-    print(data)
+    global motionData;
     motionData = json.loads(data)
-    print("new motiondata\n", motionData[0]["time"])
 
 
 def start_server():
@@ -40,8 +40,37 @@ def start_server():
 
 threading.Thread(target=start_server).start()
 
+def format_data():
+    times = []
+    ax = []
+    ay = []
+    az = []
+    for point in motionData:
+        times.append(point["time"])
+        ax.append(point["ax"])
+        ay.append(point["ay"])
+        az.append(point["az"])
+    
+    plotData(times, ax, ay, az)
+
+
+
+def plotData(times, ax, ay, az):
+    plt.close()
+    plt.plot(times, ax, 'o', color='black', label="x acceleration");
+    plt.plot(times, ay, 'o', color='red', label="y acceleration");
+    plt.plot(times, az, 'o', color='blue', label="z acceleration");
+    plt.legend()
+    plt.show()
+
+
+
 while(True):
     inputTyped = input("Enter Command: ")
     if(inputTyped == "motion"):
         print("here is motion data:\n" , motionData)
+    if(inputTyped == "mlen"):
+        print("here is motion data points:\n" , len(motionData))
+    if(inputTyped == "f"):
+        format_data()
 
