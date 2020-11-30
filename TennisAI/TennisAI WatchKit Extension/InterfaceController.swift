@@ -80,6 +80,7 @@ class InterfaceController: WKInterfaceController {
                 let x = data!.userAcceleration.x;
                 let y = data!.userAcceleration.y;
                 let z = data!.userAcceleration.z;
+                
                 let time = data!.timestamp;
 
 
