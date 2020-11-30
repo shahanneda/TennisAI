@@ -46,7 +46,7 @@ def format_data():
     ay = []
     az = []
     for point in motionData:
-        times.append(point["time"])
+        times.append(point["time"] - motionData[0]["time"])
         ax.append(point["ax"])
         ay.append(point["ay"])
         az.append(point["az"])
