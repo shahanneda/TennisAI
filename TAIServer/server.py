@@ -58,7 +58,7 @@ def format_data():
         az.append(point["az"])
     
     # plotData(times, ax, ay, az)
-    plotData3D(times, ax, ay, az)
+    plotData(times, ax, ay, az)
 
 
 
