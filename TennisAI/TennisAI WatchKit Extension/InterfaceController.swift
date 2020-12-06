@@ -10,6 +10,7 @@ import WatchKit
 import Foundation
 import CoreMotion
 import os
+import HealthKit
 
 class InterfaceController: WKInterfaceController {
     @IBOutlet weak var labelX: WKInterfaceLabel!
@@ -23,11 +24,57 @@ class InterfaceController: WKInterfaceController {
 
     let motionManager = CMMotionManager()
 
-
+    let healthStore = HKHealthStore()
+    var session: HKWorkoutSession!
+    var builder: HKLiveWorkoutBuilder!
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 //        self.motionData.append(TennisMotionData(time: 10330.44, ax: 44.44, ay:44, az:44));
+        setupHealthKitSession();
     }
+    
+    // just doing this session since we still neeed to motion data when the watch face is off, however we dont actualyl need any of the data
+    func setupHealthKitSession(){
+        let typesToShare: Set = [
+            HKQuantityType.workoutType()
+        ]
+//
+//        // The quantity types to read from the health store.
+        let typesToRead: Set = [
+            HKQuantityType.quantityType(forIdentifier: .heartRate)!,
+
+        ]
+//
+//
+        // Request authorization for those quantity types.
+        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
+        }
+        
+        // Handle error.
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = .tennis
+        configuration.locationType = .outdoor
+        
+        
+        do {
+            session = try HKWorkoutSession(healthStore: healthStore, configuration: configuration)
+            builder = session.associatedWorkoutBuilder()
+        } catch {
+            // Handle any exceptions.
+            return
+        }
+
+        session.startActivity(with: Date())
+        builder.beginCollection(withStart: Date()) { (success, error) in
+        }
+        
+        // TODO: Refactor this functino to its own class so we we can assign delegates and actually collect data
+//        session.delegate = self
+//        builder.delegate = self
+
+    }
+    
     
     // Just sends a post request to the server with the data from the last run
     @IBAction func ButtonClicked() {
@@ -104,6 +151,12 @@ class InterfaceController: WKInterfaceController {
         print("got here did diactivarte")
         super.didDeactivate()
         motionManager.stopDeviceMotionUpdates()
+        builder.endCollection(withEnd: Date()) { (success, error) in
+            self.builder.finishWorkout { (workout, error) in
+                print("finished health kit session")
+            }
+        }
+
     }
         
     func logError(_ msg: StaticString, _ params: Any...) {

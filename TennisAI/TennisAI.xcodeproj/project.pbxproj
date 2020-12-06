@@ -22,6 +22,7 @@
 		6B3885AC25732708007EBDFD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3885AB25732708007EBDFD /* NotificationController.swift */; };
 		6B3885AE25732708007EBDFD /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3885AD25732708007EBDFD /* ComplicationController.swift */; };
 		6B3885B025732708007EBDFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B3885AF25732708007EBDFD /* Assets.xcassets */; };
+		6BFCF8C62578AD3C009FE35E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BFCF8C52578AD3C009FE35E /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		6B3885AF25732708007EBDFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B3885B125732708007EBDFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B3885B225732708007EBDFD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		6BFCF8C32578AD3C009FE35E /* TennisAI WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TennisAI WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		6BFCF8C52578AD3C009FE35E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BFCF8C62578AD3C009FE35E /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +118,7 @@
 				6B38859725732707007EBDFD /* TennisAI WatchKit App */,
 				6B3885A625732708007EBDFD /* TennisAI WatchKit Extension */,
 				6B38858025732705007EBDFD /* Products */,
+				6BFCF8C42578AD3C009FE35E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +159,7 @@
 		6B3885A625732708007EBDFD /* TennisAI WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6BFCF8C32578AD3C009FE35E /* TennisAI WatchKit Extension.entitlements */,
 				6B3885A725732708007EBDFD /* InterfaceController.swift */,
 				6B3885A925732708007EBDFD /* ExtensionDelegate.swift */,
 				6B3885AB25732708007EBDFD /* NotificationController.swift */,
@@ -163,6 +169,14 @@
 				6B3885B225732708007EBDFD /* PushNotificationPayload.apns */,
 			);
 			path = "TennisAI WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		6BFCF8C42578AD3C009FE35E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6BFCF8C52578AD3C009FE35E /* HealthKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,6 +489,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "TennisAI WatchKit Extension/TennisAI WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7J5U4EJJJ;
 				INFOPLIST_FILE = "TennisAI WatchKit Extension/Info.plist";
@@ -497,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "TennisAI WatchKit Extension/TennisAI WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7J5U4EJJJ;
 				INFOPLIST_FILE = "TennisAI WatchKit Extension/Info.plist";

@@ -29,5 +29,9 @@
 	<string>ca.shahan.TennisAI</string>
 	<key>WKWatchKitApp</key>
 	<true/>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Needed to update tennis data</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Needed to update tennis data</string>
 </dict>
 </plist>
